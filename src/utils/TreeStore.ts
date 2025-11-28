@@ -5,10 +5,10 @@ export type TreeItem = {
 }
 
 class TreeStore {
-  private items: Map<string, TreeItem>
+  private items: Map<string | number, TreeItem>
 
   constructor(items: Array<TreeItem>) {
-    this.items = new Map(items.map((item) => [String(item.id), item]))
+    this.items = new Map(items.map((item) => [item.id, item]))
   }
 
   public getAll(): TreeItem[] {
@@ -16,7 +16,7 @@ class TreeStore {
   }
 
   public getItem(id: string | number): TreeItem | undefined {
-    return this.items.get(String(id))
+    return this.items.get(id)
   }
 
   public getChildren(id: string | number): TreeItem[] {
@@ -46,15 +46,15 @@ class TreeStore {
   }
 
   public addItem(item: TreeItem) {
-    this.items.set(String(item.id), item)
+    this.items.set(item.id, item)
   }
 
   public removeItem(id: string | number) {
-    this.items.delete(String(id))
+    this.items.delete(id)
   }
 
   public updateItem(item: TreeItem) {
-    this.items.set(String(item.id), item)
+    this.items.set(item.id, item)
   }
 }
 
